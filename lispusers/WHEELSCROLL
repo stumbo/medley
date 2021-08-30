@@ -1,11 +1,11 @@
-(DEFINE-FILE-INFO READTABLE "INTERLISP" PACKAGE "INTERLISP")
-(FILECREATED "11-Jun-2021 12:50:16" 
-{DSK}<Users>kaplan>Local>medley3.5>git-medley>lispusers>WHEELSCROLL.;18 10803  
+(DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
+(FILECREATED "29-Aug-2021 17:48:46" 
+{DSK}<Users>kaplan>Local>medley3.5>git-medley>lispusers>WHEELSCROLL.;4 11332  
 
-      changes to%:  (FNS ENABLEWHEELSCROLL)
+      changes to%:  (VARS WHEELSCROLLCOMS)
 
-      previous date%: "11-Jun-2021 11:11:10" 
-{DSK}<Users>kaplan>Local>medley3.5>git-medley>lispusers>WHEELSCROLL.;14)
+      previous date%: "11-Jun-2021 12:50:16" 
+{DSK}<Users>kaplan>Local>medley3.5>git-medley>lispusers>WHEELSCROLL.;1)
 
 
 (PRETTYCOMPRINT WHEELSCROLLCOMS)
@@ -14,12 +14,14 @@
        [(FNS ENABLEWHEELSCROLL WHEELSCROLL WHEELSCROLL.DOIT INSTALL-WHEELSCROLL 
              LISPINTERRUPTS.WHEELSCROLL)
         
-        (* ;; "These are the highest meta-ctrl characters, they will be unaffected by teh state of ctrl and meta mode keys")
+        (* ;; "These are the highest Function,# control characters, they will be unaffected by the state of ctrl and meta mode keys")
 
-        (DECLARE%: EVAL@COMPILE DONTCOPY (CONSTANTS (UP 156)
-                                                (DOWN 157)
-                                                (LEFT 158)
-                                                (RIGHT 159)))
+        [DECLARE%: EVAL@COMPILE DONTCOPY (ALISTS (CHARACTERNAMES WHEEL-UP WHEEL-DOWN WHEEL-LEFT 
+                                                        WHEEL-RIGHT))
+               (CONSTANTS (UP (CHARCODE WHEEL-UP))
+                      (DOWN (CHARCODE WHEEL-DOWN))
+                      (LEFT (CHARCODE WHEEL-LEFT))
+                      (RIGHT (CHARCODE WHEEL-RIGHT]
         (GLOBALVARS WHEELSCROLLDELTA WHEELSCROLLSETTLETIME \WHEELSCROLLINPROGRESS)
         
         (* ;; "To restore the keyactions for PAD..., if the keyaction table has been reinitialized")
@@ -180,25 +182,31 @@
 
 
 (* ;; 
-"These are the highest meta-ctrl characters, they will be unaffected by teh state of ctrl and meta mode keys"
+"These are the highest Function,# control characters, they will be unaffected by the state of ctrl and meta mode keys"
 )
 
 (DECLARE%: EVAL@COMPILE DONTCOPY 
+
+(ADDTOVAR CHARACTERNAMES (WHEEL-UP "Function,#^\")
+                             (WHEEL-DOWN "Function,#^]")
+                             (WHEEL-LEFT "Function,#^^")
+                             (WHEEL-RIGHT "Function,#Tenexeol"))
+
 (DECLARE%: EVAL@COMPILE 
 
-(RPAQQ UP 156)
+(RPAQ UP (CHARCODE WHEEL-UP))
 
-(RPAQQ DOWN 157)
+(RPAQ DOWN (CHARCODE WHEEL-DOWN))
 
-(RPAQQ LEFT 158)
+(RPAQ LEFT (CHARCODE WHEEL-LEFT))
 
-(RPAQQ RIGHT 159)
+(RPAQ RIGHT (CHARCODE WHEEL-RIGHT))
 
 
-(CONSTANTS (UP 156)
-       (DOWN 157)
-       (LEFT 158)
-       (RIGHT 159))
+(CONSTANTS (UP (CHARCODE WHEEL-UP))
+       (DOWN (CHARCODE WHEEL-DOWN))
+       (LEFT (CHARCODE WHEEL-LEFT))
+       (RIGHT (CHARCODE WHEEL-RIGHT)))
 )
 )
 (DECLARE%: DOEVAL@COMPILE DONTCOPY
@@ -229,6 +237,6 @@
 (ENABLEWHEELSCROLL T)
 )
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (1575 9814 (ENABLEWHEELSCROLL 1585 . 5542) (WHEELSCROLL 5544 . 8080) (WHEELSCROLL.DOIT 
-8082 . 8718) (INSTALL-WHEELSCROLL 8720 . 9535) (LISPINTERRUPTS.WHEELSCROLL 9537 . 9812)))))
+  (FILEMAP (NIL (1721 9960 (ENABLEWHEELSCROLL 1731 . 5688) (WHEELSCROLL 5690 . 8226) (WHEELSCROLL.DOIT 
+8228 . 8864) (INSTALL-WHEELSCROLL 8866 . 9681) (LISPINTERRUPTS.WHEELSCROLL 9683 . 9958)))))
 STOP
