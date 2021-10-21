@@ -18,7 +18,7 @@ jobs:
         if: ${{ github.event.inputs.tag == null }}
         run:  |
           echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
-
+          
       - name: Set release tag to input value
         if: ${{ github.event.inputs.tag != null }}
         run: |
