@@ -81,13 +81,13 @@ jobs:
 
       - name: Release notes
         run: |
-          sed s/'$tag'/$tag/g < release-notes.md > tmp/release-notes.md  &&
+          sed s/'$tag'/$tag/g < medley/release-notes.md > medley/tmp/release-notes.md  &&
           ls tmp && env
       
       - name: push the release
         uses: ncipollo/release-action@v1.8.10
         with: 
-          artifacts: tmp/${{ env.tag }}-loadups.tgz,tmp/${{ env.tag }}-runtime.tgz
+          artifacts: medley/tmp/${{ env.tag }}-loadups.tgz,medley/tmp/${{ env.tag }}-runtime.tgz
           tag: ${{ env.tag }}
-          bodyfile: tmp/release-notes.md
+          bodyfile: medley/tmp/release-notes.md
           token: ${{ secrets.GITHUB_TOKEN }}
