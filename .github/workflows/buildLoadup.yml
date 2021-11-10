@@ -36,26 +36,19 @@ jobs:
           latest: true
           fileName: "maiko-211107-linux.x86_64.tgz" 
 
-      - name: test
+      - name: Untar file
         run: |
-          pwd
           tar -xvzf "maiko-211107-linux.x86_64.tgz"
-          cd maiko
-          ls -la
 
       - name: install vnc
         run: sudo apt-get update && sudo apt-get install -y tightvncserver
 
       - name: Build Loadout
         run: |
-          ps -af
           Xvnc -geometry 1280x720 :0 &
-          ps -af
           export DISPLAY=":0"
-          env
           PATH="$PWD/maiko:$PATH" 
           scripts/loadup-all.sh
-          ps -af
 
       - name: Build release tar get libs
         run: |
