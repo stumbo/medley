@@ -95,7 +95,7 @@ jobs:
       - name: Release notes
         run: |
           sed s/'$tag'/$tag/g < release-notes.md > tmp/release-notes.md
-      
+     
       - name: push the release
         uses: ncipollo/release-action@v1.8.10
         with: 
