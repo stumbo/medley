@@ -27,24 +27,28 @@ jobs:
       - name: Checkout Medley
         uses: actions/checkout@v2
 
-      - name: Get the latest Maiko Release
-        uses: actions/checkout@v2
+      # Download Maiko Release Assets
+      - name: Download Release Assets
+        uses: robinraju/release-downloader@v1.2
         with:
-          repository: interlisp/maiko
-          path: maiko
+          repository: Interlisp/maiko
+          token: ${{ secrets.GITHUB_TOKEN }}
+          latest: true
+          fileName: "maiko-211107-linux.x86_64.tgz" 
 
-      - name: install compiler
-        run: sudo apt-get update && sudo apt-get install -y make clang libx11-dev gcc x11vnc xvfb
+      - name: Untar file
+        run: |
+          tar -xvzf "maiko-211107-linux.x86_64.tgz"
 
       - name: install vnc
-        run: sudo apt-get install -y tightvncserver
-
-      - name: Compile Maiko
-        working-directory: maiko/bin
-        run: ./makeright  x && ./makeright init
+        run: sudo apt-get update && sudo apt-get install -y tightvncserver
 
       - name: Build Loadout
-        run: pwd && Xvnc -once -geometry 1280x720 :0 & DISPLAY=:0 PATH="/maiko:$PATH" scripts/loadup-all.sh
+        run: |
+          Xvnc -geometry 1280x720 :0 &
+          export DISPLAY=":0"
+          PATH="$PWD/maiko:$PATH" 
+          scripts/loadup-all.sh
 
       - name: Build release tar get libs
         run: |
