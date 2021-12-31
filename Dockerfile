@@ -3,7 +3,6 @@ ARG build_date
 ARG medley_release
 ARG maiko_release
 LABEL name="Medley"
-# LABEL tags=${tags}
 LABEL description="The Medley Interlisp environment"
 LABEL url="https://github.com/Interlisp/medley"
 LABEL build-time=$build_date
