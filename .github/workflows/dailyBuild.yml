@@ -16,7 +16,7 @@ jobs:
 
       - name: Check SHA
         id: check_sha
-        uses: actions/cache@v2.17
+        uses: actions/cache@v2.1.7
         with:
           path: check-SHA
           key: check-SHA-$${{ github.sha }}
