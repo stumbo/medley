@@ -2,7 +2,7 @@ name: Interlisp Toolset Daily Build Action
 # Run daily at 0200 hrs
 on:
   schedule:
-    - cron: '0 */2 * *'
+    - cron: '0 */2 * * *'
 
 jobs:
   push_checker:
