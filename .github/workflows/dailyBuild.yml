@@ -32,8 +32,8 @@ jobs:
 
       - name: Build Medley
         if: steps.check_sha.output.cache-hit != 'true'
-          run: |
-            echo "Execute additional steps"
-            echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
-          if: steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
-            uses: ./github/actions/loadup@v1
+        run: |
+          echo "Execute additional steps"
+          echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
+        if: steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
+          uses: ./github/actions/loadup@v1
