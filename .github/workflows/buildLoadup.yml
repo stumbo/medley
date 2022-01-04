@@ -6,7 +6,11 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description:  'Release Tag'
+        description: 'Release Tag'
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Release Tag'
 
 # Jobs that compose this workflow
 jobs:
