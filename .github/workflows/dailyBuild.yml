@@ -2,7 +2,7 @@ name: Interlisp Toolset Daily Build Action
 # Run daily at 0200 hrs
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 2 * * *'
 
 jobs:
   push_checker:
@@ -21,6 +21,19 @@ jobs:
           path: check-SHA
           key: check-SHA-$${{ github.sha }}
 
+      # Get Medley release information, retrieves the name of the latest
+      # release. 
+      - name: Get Medley Release Information
+        id: latest_medley_version
+        uses: abatilo/release-info-action@v1.3.0
+        with:
+          owner: Interlisp
+          repo: medley
+
       - name: Build Medley
         if: steps.check_sha.output.cache-hit != 'true'
-        run: echo "Execute additional steps"
+        run: |
+          echo "Execute additional steps"
+          echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
+        if: steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
+          uses: ./github/workflows/loadup@v1
