@@ -36,4 +36,4 @@ jobs:
           echo "Execute additional steps"
           echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
         if: steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
-          uses: ./github/actions/loadup@v1
+          uses: ./github/workflows/loadup@v1
