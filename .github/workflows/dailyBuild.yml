@@ -8,6 +8,10 @@ jobs:
   push_checker:
     name: Daily Interlisp Push Check and Build
     runs-on: ubuntu-latest
+    outputs:
+      desired_tag: ${{ steps.current_name.outputs.medley }}
+      cache_hit: ${{ steps.check_sha.outputs.cache-hit }}
+      latest_tag: ${{ steps.latest_medley_version.outputs.latest_tag }}
     steps:
       - name:  Create cache file
         run: |
@@ -31,9 +35,14 @@ jobs:
           repo: medley
 
       - name: Get current Release Name
+        id: current_name
         run: |
           echo "Execute additional steps"
-          echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
+          echo "medley-`date +%y%m%d`" >> $GITHUB_ENV
+          echo ::set-output name=medley::{{ $GITHUB_ENV }}
 
-      # - if: steps.check_sha.output.cache-hit != 'true' &&  steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
-      - uses: stumbo/medley/.github/workflows/buildLoadup@master
+  build_medley:
+    needs: push_checker
+    runs-on: ubuntu-latest
+    if: push_checker.outputs.cache_hit != 'true' # &&  push_checker.outputs.latest_tag != push_checker.outputs.desired_tag
+    uses: stumbo/medley/.github/workflows/buildLoadup@master
