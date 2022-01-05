@@ -30,10 +30,10 @@ jobs:
           owner: Interlisp
           repo: medley
 
-      - name: Build Medley
-        if: steps.check_sha.output.cache-hit != 'true'
+      - name: Get current Release Name
         run: |
           echo "Execute additional steps"
           echo "tag=medley-`date +%y%m%d`" >> $GITHUB_ENV
-        if: steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
-          uses: ./github/workflows/loadup@v1
+
+      # - if: steps.check_sha.output.cache-hit != 'true' &&  steps.latest_medley_version.outputs.latest_tag != {{ $GITHUB_ENV }}
+      - uses: stumbo/medley/.github/workflows/buildLoadup@master
