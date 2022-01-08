@@ -1,8 +1,8 @@
 name: Interlisp Toolset Daily Build Action
 # Run daily at 0200 hrs
 on:
-  schedule:
-    - cron: '0 2 * * *'
+#  schedule:
+#    - cron: '0 2 * * *'
   workflow_dispatch:
 
 jobs:
@@ -41,6 +41,12 @@ jobs:
           echo "Execute additional steps"
           echo "medley-`date +%y%m%d`" >> $GITHUB_ENV
           echo ::set-output name=medley::{{ $GITHUB_ENV }}
+
+#  check_if_build_needed:
+#    needs: push_checker     
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: build_medley
 
   build_medley:
     needs: push_checker
