@@ -3,6 +3,7 @@ name: Interlisp Toolset Daily Build Action
 on:
   schedule:
     - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   push_checker:
@@ -44,5 +45,5 @@ jobs:
   build_medley:
     needs: push_checker
     runs-on: ubuntu-latest
-    if: push_checker.outputs.cache_hit != 'true' # &&  push_checker.outputs.latest_tag != push_checker.outputs.desired_tag
     uses: stumbo/medley/.github/workflows/buildLoadup.yml@master
+    if: push_checker.outputs.cache_hit != 'true' # &&  push_checker.outputs.latest_tag != push_checker.outputs.desired_tag
