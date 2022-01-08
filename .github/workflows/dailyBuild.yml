@@ -3,7 +3,7 @@ name: Interlisp Toolset Daily Build Action
 on:
   schedule:
     - cron: '0 2 * * *'
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   push_checker:
@@ -42,15 +42,8 @@ jobs:
           echo "medley-`date +%y%m%d`" >> $GITHUB_ENV
           echo ::set-output name=medley::{{ $GITHUB_ENV }}
 
-#  check_if_build_needed:
-#    needs: push_checker     
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: build_medley
-
   build_medley:
     needs: push_checker
     runs-on: ubuntu-latest
     uses: stumbo/medley/.github/workflows/buildLoadup.yml@master
     if: push_checker.outputs.cache_hit != 'true' # &&  push_checker.outputs.latest_tag != push_checker.outputs.desired_tag
-
