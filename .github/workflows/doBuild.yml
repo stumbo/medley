@@ -1,4 +1,7 @@
-  
+name: Daily Build Components
+on:
+  workflow_dispatch:
+
 jobs:
 
   push_checker:

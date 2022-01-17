@@ -21,8 +21,8 @@ jobs:
     steps:
       - name: Build Medley
         id: daily_medley_build
-        uses: doBuild/do_build_medley@master
-        run: echo "Medley Build Complete"
+        uses: stumbo/medley/doBuild/do_build_medley@v0.11
+      - run: echo "Medley Build Complete"
 
   build_docker_container:
     name: Build the Medley docker container
