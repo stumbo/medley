@@ -39,5 +39,3 @@ jobs:
     steps:
       - names: do something
         run: echo "Build Online Medley System"
-
-
