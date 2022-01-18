@@ -27,7 +27,7 @@ jobs:
   build_docker_container:
     name: Build the Medley docker container
     runs-on: ubuntu-latest
-    needs: buld_medley
+    needs: build_medley
     steps:
       - name: do something
         run: echo "Build Docker Container"
