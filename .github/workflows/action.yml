@@ -51,12 +51,14 @@ jobs:
   do_build_medley:
     needs: pushChecker
     runs-on: ubuntu-latest
-    # uses: stumbo/medley/.github/workflows/buildLoadup.yml@master
+    uses: stumbo/medley/.github/workflows/loadup@v0.11
+      with:
+        tag: null
     if: ( needs.pushChecker.outputs.cacheHit != true)  &&  ( needs.pushChecker.outputs.latestTag !=  needs.pushChecker.outputs.desiredTag )
 
-    steps:
-     - name: do work
-       run: |
-        echo "Cache Hit: " ${{ needs.pushChecker.outputs.cacheHit }} 
-        echo "Desired Tag: " ${{ needs.pushChecker.outputs.desiredTag }}
-        echo "Latest Tag: " ${{ needs.pushChecker.outputs.latestTag }}
+#    steps:
+#     - name: do work
+#       run: |
+#        echo "Cache Hit: " ${{ needs.pushChecker.outputs.cacheHit }} 
+#        echo "Desired Tag: " ${{ needs.pushChecker.outputs.desiredTag }}
+#        echo "Latest Tag: " ${{ needs.pushChecker.outputs.latestTag }}
