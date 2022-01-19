@@ -56,6 +56,6 @@ jobs:
     steps:
      - name: do work
        run: |
-        echo "Cache Hit:  ${{ needs.pushChecker.outputs.cacheHit }} "
+        echo "Cache Hit: " ${{ needs.pushChecker.outputs.cacheHit }} 
         echo "Desired Tag: " ${{ needs.pushChecker.outputs.desiredTag }}
         echo "Latest Tag: " ${{ needs.pushChecker.outputs.latestTag }}
