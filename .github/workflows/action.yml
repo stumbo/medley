@@ -52,7 +52,7 @@ jobs:
     needs: pushChecker
     runs-on: ubuntu-latest
     # uses: stumbo/medley/.github/workflows/buildLoadup.yml@master
-    if: !needs.pushChecker.outputs.cacheHit  &&  ( needs.pushChecker.outputs.latestTag !=  needs.pushChecker.outputs.desiredTag )
+    if: ( needs.pushChecker.outputs.cacheHit != true)  &&  ( needs.pushChecker.outputs.latestTag !=  needs.pushChecker.outputs.desiredTag )
 
     steps:
      - name: do work
