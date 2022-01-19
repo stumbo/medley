@@ -5,13 +5,14 @@ on:
 
 jobs:
 
-  push_checker:
+  pushChecker:
     name: Daily Interlisp Push Check and Build
     runs-on: ubuntu-latest
     outputs:
-      desired_tag: ${{ steps.current_name.outputs.medley }}
-      cache_hit: ${{ steps.check_sha.outputs.cache-hit }}
-      latest_tag: ${{ steps.latest_medley_version.outputs.latest_tag }}
+      desiredTag: ${{ steps.currentName.outputs.medley }}
+      cacheHit: ${{ steps.checkSha.outputs.cache-hit }}
+      latestTag: ${{ steps.latestMedleyVersion.outputs.latest_tag }}
+
     steps:
       - name:  Create cache file
         run: |
@@ -19,7 +20,7 @@ jobs:
           echo ${{ github.sha }} > github-sha.txt
 
       - name: Check SHA
-        id: check_sha
+        id: checkSha
         uses: actions/cache@v2.1.7
         with:
           path: check-SHA
@@ -28,17 +29,18 @@ jobs:
       # Get Medley release information, retrieves the name of the latest
       # release. 
       - name: Get Medley Release Information
-        id: latest_medley_version
+        id: latestMedleyVersion
         uses: abatilo/release-info-action@v1.3.0
         with:
           owner: Interlisp
           repo: medley
 
       - name: Get current Release Name
-        id: current_name
+        id: currentName
         run: |
           echo "Execute additional steps"
           echo ::set-output name=medley::"medley-`date +%y%m%d`"
+          echo "Latest Tag ${{ steps.latestMedleyVersion.outputs.latest_tag }}"
 
 #  check_if_build_needed:
 #    needs: push_checker     
@@ -47,13 +49,13 @@ jobs:
 #      - uses: build_medley
 
   do_build_medley:
-    needs: push_checker
+    needs: pushChecker
     runs-on: ubuntu-latest
     # uses: stumbo/medley/.github/workflows/buildLoadup.yml@master
-    # if: push_checker.outputs.cache_hit # &&  push_checker.outputs.latest_tag != push_checker.outputs.desired_tag
+    #if: needs.push_checker.outputs.cache_hit &&  ( needs.push_checker.outputs.latest_tag !=  needs.push_checker.outputs.desired_tag )
     steps:
      - name: do work
        run: |
-        echo "Cache Hit:  ${{ needs.push_checker.outputs.cache_hit }} "
-        echo "Desired Tag: " ${{ needs.push_checker.outputs.desired_tag }}
-        echo "Latest Tag: " ${{ needs.push_checker.outputs.latest_tag }}
+        echo "Cache Hit:  ${{ needs.pushChecker.outputs.cacheHit }} "
+        echo "Desired Tag: " ${{ needs.pushChecker.outputs.desiredTag }}
+        echo "Latest Tag: " ${{ needs.pushChecker.outputs.latestTag }}
