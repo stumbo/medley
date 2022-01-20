@@ -14,7 +14,7 @@ jobs:
       - name: do something
         run: echo "Build Maiko"
 
-   medleyPushChecker:
+  medleyPushChecker:
     name: Daily Interlisp Push Check and Build
     runs-on: ubuntu-latest
     needs: build_maiko
