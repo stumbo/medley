@@ -18,7 +18,7 @@ jobs:
     name: Build Medley Loadups
     runs-on: ubuntu-latest
     needs: build_maiko
-    uses: stumbo/medley/.github/workflows/action@v0.11
+    uses: stumbo/medley/.github/workflows/action.yml@v0.11
     # steps:
     #   - name: Build Medley
     #     id: daily_medley_build
