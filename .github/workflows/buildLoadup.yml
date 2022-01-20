@@ -6,13 +6,27 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description:  'Release Tag'
+        required: false
+        type: string
+        description: 'Release Tag'
+  workflow_call:
+    inputs:
+      tag:
+        required: false
+        type: string
+        description: 'Release Tag'
+    outputs:
+      rebuilt:
+        value: ${{ jobs.loadup.outputs.rebuilt }}
+        description: 'Boolean value specifying whether Medley was rebuilt'
 
 # Jobs that compose this workflow
 jobs:
   # Build Loadup
   loadup:
     runs-on: ubuntu-latest
+    outputs:
+      rebuilt: ${{ steps.completion.outputs.rebuilt }}
     steps:
       - name: Set release tag if currently undefined
         if: ${{ github.event.inputs.tag == null }}
@@ -104,3 +118,8 @@ jobs:
           draft: true
           bodyfile: tmp/release-notes.md
           token: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: set rebuilt flag to true
+        id: completion
+        run:
+          echo ::set-output name=rebuilt::true
