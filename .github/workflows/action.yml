@@ -42,12 +42,6 @@ jobs:
           echo ::set-output name=medley::"medley-`date +%y%m%d`"
           echo "Latest Tag ${{ steps.latestMedleyVersion.outputs.latest_tag }}"
 
-#  check_if_build_needed:
-#    needs: push_checker     
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: build_medley
-
   do_build_medley:
     needs: pushChecker
     runs-on: ubuntu-latest

@@ -18,11 +18,11 @@ jobs:
     name: Build Medley Loadups
     runs-on: ubuntu-latest
     needs: build_maiko
-    steps:
-      - name: Build Medley
-        id: daily_medley_build
-        uses: stumbo/medley/.github/workflows/action@v0.11
-      - run: echo "Medley Build Complete"
+    uses: stumbo/medley/.github/workflows/action@v0.11
+    # steps:
+    #   - name: Build Medley
+    #     id: daily_medley_build
+    #   - run: echo "Medley Build Complete"
 
   build_docker_container:
     name: Build the Medley docker container
