@@ -17,7 +17,7 @@ on:
         description: 'Release Tag'
     outputs:
       rebuilt:
-        value: ${{ steps.completion.outputs.rebuilt }}
+        value: ${{ jobs.loadup.outputs.rebuilt }}
         description: 'Boolean value specifying whether Medley was rebuilt'
 
 # Jobs that compose this workflow
@@ -25,6 +25,8 @@ jobs:
   # Build Loadup
   loadup:
     runs-on: ubuntu-latest
+    outputs:
+      rebuilt: ${{ steps.completion.outputs.rebuilt }}
     steps:
       - name: Set release tag if currently undefined
         if: ${{ github.event.inputs.tag == null }}
