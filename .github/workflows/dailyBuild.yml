@@ -57,9 +57,9 @@ jobs:
     if: ( needs.medleyPushChecker.outputs.cacheHit != true)  &&  ( needs.medleyPushChecker.outputs.latestTag !=  needs.medleyPushChecker.outputs.desiredTag )
     steps:
       - run: |
-        echo "cacheHit: " ${{ needs.medleyPushChecker.outputs.cacheHit }}
-        echo "latestTag: " ${{ needs.medleyPushChecker.outputs.latestTag }}
-        echo "desiredTag: " ${{ needs.medleyPushChecker.outputs.desiredTag }}
+          echo "cacheHit: " ${{ needs.medleyPushChecker.outputs.cacheHit }}
+          echo "latestTag: " ${{ needs.medleyPushChecker.outputs.latestTag }}
+          echo "desiredTag: " ${{ needs.medleyPushChecker.outputs.desiredTag }}
 
   build_docker_container:
     name: Build the Medley docker container
