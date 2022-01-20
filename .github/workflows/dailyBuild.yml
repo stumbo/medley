@@ -52,7 +52,6 @@ jobs:
 
   build_medley:
     needs: medleyPushChecker
-    runs-on: ubuntu-latest
     uses: stumbo/medley/.github/workflows/buildLoadup.yml@v0.11
     if: ( needs.medleyPushChecker.outputs.cacheHit != true)  &&  ( needs.medleyPushChecker.outputs.latestTag !=  needs.medleyPushChecker.outputs.desiredTag )
 
