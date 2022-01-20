@@ -58,7 +58,6 @@ jobs:
     steps:
       - run: |
           echo "cacheHit: " ${{ needs.medleyPushChecker.outputs.cacheHit }}
-          echo "latestTag: " ${{ needs.medleyPushChecker.outputs.latestTag }}
           echo "desiredTag: " ${{ needs.medleyPushChecker.outputs.desiredTag }}
 
   build_docker_container:
