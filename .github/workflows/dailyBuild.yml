@@ -61,7 +61,9 @@ jobs:
     needs: build_medley
     steps:
       - name: do something
-        run: echo "Build Docker Container"
+        run: |
+          echo "Build Docker Container"
+          echo "Did we build medley? " ${{ needs.build_medley.outputs.rebuilt }}
 
   build_online_medley:
     name: Build the online Medley system

@@ -15,6 +15,10 @@ on:
         required: false
         type: string
         description: 'Release Tag'
+    outputs:
+      rebuilt:
+        value: ${{ steps.completion.outputs.rebuilt }}
+        description: 'Boolean value specifying whether Medley was rebuilt'
 
 # Jobs that compose this workflow
 jobs:
@@ -112,3 +116,8 @@ jobs:
           draft: true
           bodyfile: tmp/release-notes.md
           token: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: set rebuilt flag to true
+        id: completion
+        run:
+          echo ::set-output name=rebuilt::true
