@@ -6,10 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       tag:
+        required: false
+        type: string
         description: 'Release Tag'
   workflow_call:
     inputs:
       tag:
+        required: false
+        type: string
         description: 'Release Tag'
 
 # Jobs that compose this workflow
