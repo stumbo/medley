@@ -53,12 +53,8 @@ jobs:
   build_medley:
     needs: medleyPushChecker
     runs-on: ubuntu-latest
-    #uses: stumbo/medley/.github/workflows/buildLoadup.yml@v0.11
+    uses: stumbo/medley/.github/workflows/buildLoadup.yml@v0.11
     if: ( needs.medleyPushChecker.outputs.cacheHit != true)  &&  ( needs.medleyPushChecker.outputs.latestTag !=  needs.medleyPushChecker.outputs.desiredTag )
-    steps:
-      - run: |
-          echo "cacheHit: " ${{ needs.medleyPushChecker.outputs.cacheHit }}
-          echo "desiredTag: " ${{ needs.medleyPushChecker.outputs.desiredTag }}
 
   build_docker_container:
     name: Build the Medley docker container
