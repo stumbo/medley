@@ -52,7 +52,7 @@ jobs:
 
   build_medley:
     needs: medleyPushChecker
-    uses: stumbo/medley/.github/workflows/buildLoadup.yml@v0.11
+    uses: stumbo/medley/.github/workflows/buildLoadup.yml@v0.12
     if: ( needs.medleyPushChecker.outputs.cacheHit != true)  &&  ( needs.medleyPushChecker.outputs.latestTag !=  needs.medleyPushChecker.outputs.desiredTag )
 
   build_docker_container:
